@@ -51,5 +51,8 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "MindMatch.sln"
+    "dotnet.defaultSolution": "MindMatch.sln",
+     "omnisharp.useModernNet": true,
+    "omnisharp.useGlobalMono": "never",
+    "omnisharp.loggingLevel": "debug"
 }

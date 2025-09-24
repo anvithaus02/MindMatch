@@ -3,20 +3,11 @@ using UnityEngine;
 public class DynamicGridGenerator : MonoBehaviour
 {
     public GameObject cardPrefab;
-    public int rows = 2;
-    public int columns = 3;
     public float padding = 5f;
 
-    private void Update()
+    public SpawnData GetCardSpawnPositions(int rows, int columns)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GenerateGrid();
-        }
-    }
-
-    public void GenerateGrid()
-    {
+        SpawnData spawnData= new SpawnData();
         RectTransform container = GetComponent<RectTransform>();
 
         foreach (Transform child in transform)
@@ -34,6 +25,11 @@ public class DynamicGridGenerator : MonoBehaviour
 
         Vector2 startPos = new Vector2(-totalGridWidth / 2 + cellSize / 2, totalGridHeight / 2 - cellSize / 2);
 
+        spawnData.startPos = startPos;
+        spawnData.cellSize = cellSize;
+        spawnData.padding = padding;
+
+        return spawnData;
         for (int r = 0; r < rows; r++)
         {
             for (int c = 0; c < columns; c++)
