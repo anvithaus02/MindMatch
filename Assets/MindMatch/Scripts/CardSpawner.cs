@@ -28,9 +28,9 @@ public class CardSpawner
 
     public void SpawnCards(Transform parent, List<Sprite> cardImages, int rows, int columns, float padding)
     {
-        if (cardImages.Count != rows * columns)
+        if (cardImages.Count != (rows * columns))
         {
-            Debug.LogError("Card images count does not match total cards!");
+            Debug.LogError("Card images count does not match total cards!" +cardImages.Count+"   "+(rows * columns));
             return;
         }
 
