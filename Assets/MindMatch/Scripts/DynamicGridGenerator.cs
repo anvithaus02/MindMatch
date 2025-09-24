@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DynamicGridGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private int rows = 2;
-    [SerializeField] private int columns = 3;
-    [SerializeField] private float padding = 5f;
+    public GameObject cardPrefab;
+    public int rows = 2;
+    public int columns = 3;
+    public float padding = 5f;
 
     private void Update()
     {
@@ -19,8 +17,6 @@ public class DynamicGridGenerator : MonoBehaviour
 
     public void GenerateGrid()
     {
-        RectTransform container = GetComponent<RectTransform>();
-
         foreach (Transform child in transform)
             Destroy(child.gameObject);
 
@@ -29,14 +25,12 @@ public class DynamicGridGenerator : MonoBehaviour
 
         float cellWidth = (containerWidth - (columns - 1) * padding) / columns;
         float cellHeight = (containerHeight - (rows - 1) * padding) / rows;
+        float cellSize = Mathf.Min(cellWidth, cellHeight);
 
-        float totalGridWidth = columns * cellWidth + (columns - 1) * padding;
-        float totalGridHeight = rows * cellHeight + (rows - 1) * padding;
+        float totalGridWidth = columns * cellSize + (columns - 1) * padding;
+        float totalGridHeight = rows * cellSize + (rows - 1) * padding;
 
-        Vector2 pivotOffset = new Vector2(container.pivot.x * containerWidth, container.pivot.y * containerHeight);
-
-        Vector2 startPos = new Vector2(-totalGridWidth / 2 + cellWidth / 2, totalGridHeight / 2 - cellHeight / 2);
-        startPos = startPos - pivotOffset + new Vector2(containerWidth / 2, containerHeight / 2);
+        Vector2 startPos = new Vector2(-totalGridWidth / 2 + cellSize / 2, totalGridHeight / 2 - cellSize / 2);
 
         for (int r = 0; r < rows; r++)
         {
@@ -44,11 +38,11 @@ public class DynamicGridGenerator : MonoBehaviour
             {
                 GameObject card = Instantiate(cardPrefab, transform);
                 RectTransform rt = card.GetComponent<RectTransform>();
-                rt.sizeDelta = new Vector2(cellWidth, cellHeight);
+                rt.sizeDelta = new Vector2(cellSize, cellSize);
 
-                float posX = startPos.x + c * (cellWidth + padding);
-                float posY = startPos.y - r * (cellHeight + padding);
-                rt.anchoredPosition = new Vector2(posX, posY);
+                float posX = startPos.x + c * (cellSize + padding);
+                float posY = startPos.y - r * (cellSize + padding);
+                rt.localPosition = new Vector3(posX, posY, 0);
             }
         }
     }
