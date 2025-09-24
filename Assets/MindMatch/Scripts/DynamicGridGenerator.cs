@@ -4,37 +4,23 @@ using UnityEngine;
 
 public class DynamicGridGenerator : MonoBehaviour
 {
-    public GameObject cardPrefab;    // Card prefab
-    public int rows = 2;
-    public int columns = 5;
-    public float padding = 5f;       // Space between cards
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private int rows = 2;
+    [SerializeField] private int columns = 3;
+    [SerializeField] private float padding = 5f;
 
     private void Update()
     {
-        // Test trigger: generate grid when Escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Escape pressed: generating grid for testing...");
             GenerateGrid();
         }
     }
 
     public void GenerateGrid()
     {
-        if (cardPrefab == null)
-        {
-            Debug.LogError("Assign a cardPrefab!");
-            return;
-        }
-
         RectTransform container = GetComponent<RectTransform>();
-        if (container == null)
-        {
-            Debug.LogError("Attach this script to a UI container with RectTransform!");
-            return;
-        }
 
-        // Clear existing cards
         foreach (Transform child in transform)
             Destroy(child.gameObject);
 
@@ -44,9 +30,14 @@ public class DynamicGridGenerator : MonoBehaviour
         float cellWidth = (containerWidth - (columns - 1) * padding) / columns;
         float cellHeight = (containerHeight - (rows - 1) * padding) / rows;
 
-        Vector2 startPos = new Vector2(-containerWidth / 2 + cellWidth / 2, containerHeight / 2 - cellHeight / 2);
+        float totalGridWidth = columns * cellWidth + (columns - 1) * padding;
+        float totalGridHeight = rows * cellHeight + (rows - 1) * padding;
 
-        // Instantiate cards in rows and columns
+        Vector2 pivotOffset = new Vector2(container.pivot.x * containerWidth, container.pivot.y * containerHeight);
+
+        Vector2 startPos = new Vector2(-totalGridWidth / 2 + cellWidth / 2, totalGridHeight / 2 - cellHeight / 2);
+        startPos = startPos - pivotOffset + new Vector2(containerWidth / 2, containerHeight / 2);
+
         for (int r = 0; r < rows; r++)
         {
             for (int c = 0; c < columns; c++)
