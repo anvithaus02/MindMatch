@@ -17,6 +17,8 @@ public class DynamicGridGenerator : MonoBehaviour
 
     public void GenerateGrid()
     {
+        RectTransform container = GetComponent<RectTransform>();
+
         foreach (Transform child in transform)
             Destroy(child.gameObject);
 
