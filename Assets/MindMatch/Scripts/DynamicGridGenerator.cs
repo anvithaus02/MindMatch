@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class DynamicGridGenerator : MonoBehaviour
 {
-    public SpawnData GetCardSpawnPositions(int rows, int columns,float padding)
+    public SpawnData GetCardSpawnPositions(int rows, int columns, float padding)
     {
-        SpawnData spawnData= new SpawnData();
+
         RectTransform container = GetComponent<RectTransform>();
 
         foreach (Transform child in transform)
@@ -22,9 +22,7 @@ public class DynamicGridGenerator : MonoBehaviour
 
         Vector2 startPos = new Vector2(-totalGridWidth / 2 + cellSize / 2, totalGridHeight / 2 - cellSize / 2);
 
-        spawnData.startPos = startPos;
-        spawnData.cellSize = cellSize;
-        spawnData.padding = padding;
+        SpawnData spawnData = new SpawnData(cellSize, startPos, padding);
 
         return spawnData;
     }
