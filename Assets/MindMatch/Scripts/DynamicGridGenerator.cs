@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class DynamicGridGenerator : MonoBehaviour
 {
-    public GameObject cardPrefab;
-    public float padding = 5f;
-
-    public SpawnData GetCardSpawnPositions(int rows, int columns)
+    public SpawnData GetCardSpawnPositions(int rows, int columns,float padding)
     {
         SpawnData spawnData= new SpawnData();
         RectTransform container = GetComponent<RectTransform>();
@@ -30,18 +27,5 @@ public class DynamicGridGenerator : MonoBehaviour
         spawnData.padding = padding;
 
         return spawnData;
-        for (int r = 0; r < rows; r++)
-        {
-            for (int c = 0; c < columns; c++)
-            {
-                GameObject card = Instantiate(cardPrefab, transform);
-                RectTransform rt = card.GetComponent<RectTransform>();
-                rt.sizeDelta = new Vector2(cellSize, cellSize);
-
-                float posX = startPos.x + c * (cellSize + padding);
-                float posY = startPos.y - r * (cellSize + padding);
-                rt.localPosition = new Vector3(posX, posY, 0);
-            }
-        }
     }
 }

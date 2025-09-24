@@ -1230,8 +1230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b91396cbcba84bafd38824a731ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mindCard: {fileID: 3733163061430215031, guid: 0e73c17d6ecc247438c007d43af7d7e3, type: 3}
+  _mindCardPrefab: {fileID: 3733163061430215031, guid: 0e73c17d6ecc247438c007d43af7d7e3, type: 3}
   _dynamicGridGenerator: {fileID: 904431362}
+  _categoryData: {fileID: 11400000, guid: 68b6d4ec20162f14ab343970474adbe7, type: 2}
+  category: 0
 --- !u!1 &2138264940
 GameObject:
   m_ObjectHideFlags: 0
