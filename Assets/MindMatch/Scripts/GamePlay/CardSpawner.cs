@@ -18,16 +18,14 @@ namespace MindMatch.Gameplay
     }
     public class CardSpawner
     {
-        private DynamicGridGenerator _gridGenerator;
         private MindCard _cardPrefab;
 
-        public CardSpawner(DynamicGridGenerator gridGenerator, MindCard cardPrefab)
+        public CardSpawner(MindCard cardPrefab)
         {
-            _gridGenerator = gridGenerator;
             _cardPrefab = cardPrefab;
         }
 
-        public void SpawnCards(Transform parent, List<Sprite> cardImages, int rows, int columns, float padding)
+        public void SpawnCards(RectTransform parent, List<Sprite> cardImages, int rows, int columns, float padding)
         {
             if (cardImages.Count != (rows * columns))
             {
@@ -35,16 +33,15 @@ namespace MindMatch.Gameplay
                 return;
             }
 
-            SpawnData spawnData = _gridGenerator.GetCardSpawnPositions(rows, columns, padding);
+            SpawnData spawnData = CardGridCalculator.GetCardSpawnPositions(parent, rows, columns, padding);
 
             int index = 0;
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < columns; c++)
                 {
-                    MindCard card = Object.Instantiate(_cardPrefab, parent);
+                    MindCard card = Object.Instantiate(_cardPrefab, parent.transform);
                     RectTransform rt = card.GetComponent<RectTransform>();
-
                     rt.sizeDelta = new Vector2(spawnData.cellSize, spawnData.cellSize);
                     rt.localPosition = new Vector3(
                         spawnData.startPos.x + c * (spawnData.cellSize + spawnData.padding),

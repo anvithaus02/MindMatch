@@ -1,16 +1,11 @@
 using UnityEngine;
+
 namespace MindMatch.Gameplay
 {
-    public class DynamicGridGenerator : MonoBehaviour
+    public static class CardGridCalculator
     {
-        public SpawnData GetCardSpawnPositions(int rows, int columns, float padding)
+        public static SpawnData GetCardSpawnPositions(RectTransform container, int rows, int columns, float padding)
         {
-
-            RectTransform container = GetComponent<RectTransform>();
-
-            foreach (Transform child in transform)
-                Destroy(child.gameObject);
-
             float containerWidth = container.rect.width;
             float containerHeight = container.rect.height;
 
@@ -27,5 +22,6 @@ namespace MindMatch.Gameplay
 
             return spawnData;
         }
+
     }
 }

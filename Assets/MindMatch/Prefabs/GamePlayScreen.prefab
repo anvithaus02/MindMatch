@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 218.37354, y: -0.00021362305}
+  m_AnchoredPosition: {x: 218.37354, y: -0.00024414062}
   m_SizeDelta: {x: -436.74683, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2724573334319366836
@@ -399,7 +399,6 @@ GameObject:
   - component: {fileID: 5112022403956991769}
   - component: {fileID: 5112022403956991716}
   - component: {fileID: 5112022403956991771}
-  - component: {fileID: 5112022403956991718}
   m_Layer: 5
   m_Name: GamePlayArea
   m_TagString: Untagged
@@ -465,18 +464,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5112022403956991718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5112022403956991768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253b9f2a76cf7b7429d02cb888eda4e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5112022404955816156
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mindCardPrefab: {fileID: 3733163061430215031, guid: 0e73c17d6ecc247438c007d43af7d7e3, type: 3}
-  _dynamicGridGenerator: {fileID: 5112022403956991718}
+  _gamePlayArea: {fileID: 5112022403956991769}
+  _dynamicGridGenerator: {fileID: 0}
   _categoryData: {fileID: 11400000, guid: 68b6d4ec20162f14ab343970474adbe7, type: 2}
   _backButton: {fileID: 8398867593564474256}
   _winInfoHolder: {fileID: 961719229201985049}

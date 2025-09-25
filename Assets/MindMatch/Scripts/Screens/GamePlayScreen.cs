@@ -6,7 +6,7 @@ namespace MindMatch.Gameplay.UI
     public class GamePlayScreen : MonoBehaviour
     {
         [SerializeField] private MindCard _mindCardPrefab;
-        [SerializeField] private DynamicGridGenerator _dynamicGridGenerator;
+        [SerializeField] private RectTransform _gamePlayArea;
         [SerializeField] private CategoryData _categoryData;
         [SerializeField] private BackButton _backButton;
 
@@ -24,7 +24,7 @@ namespace MindMatch.Gameplay.UI
 
         private void Awake()
         {
-            _spawner = new CardSpawner(_dynamicGridGenerator, _mindCardPrefab);
+            _spawner = new CardSpawner(_mindCardPrefab);
             _imageProvider = new CardImageProvider(_categoryData);
         }
 
@@ -46,6 +46,9 @@ namespace MindMatch.Gameplay.UI
 
             _okButton.onClick.RemoveAllListeners();
 
+            foreach (Transform child in _gamePlayArea)
+                Destroy(child.gameObject);
+
         }
 
         private void InitializeLevel(LevelData level)
@@ -57,9 +60,9 @@ namespace MindMatch.Gameplay.UI
             _matchedCards = 0;
 
             var cardImages = _imageProvider.GetShuffledPairs(level.Category, _totalCards);
-            _spawner.SpawnCards(_dynamicGridGenerator.transform, cardImages, rows, columns, padding);
+            _spawner.SpawnCards(_gamePlayArea, cardImages, rows, columns, padding);
 
-            foreach (Transform child in _dynamicGridGenerator.transform)
+            foreach (Transform child in _gamePlayArea.transform)
             {
                 MindCard card = child.GetComponent<MindCard>();
                 if (card != null)
