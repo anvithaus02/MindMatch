@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa49407079461fd42b7ae203c97e0855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontFace: {fileID: 3279648210850289023}
-  iconImage: {fileID: 3994339017197809979}
-  cardButton: {fileID: 7698484172706235295}
+  _frontFaceGO: {fileID: 3279648210850289023}
+  _iconImageUI: {fileID: 3994339017197809979}
+  _cardButton: {fileID: 7698484172706235295}
 --- !u!1 &2243567592154872309
 GameObject:
   m_ObjectHideFlags: 0
