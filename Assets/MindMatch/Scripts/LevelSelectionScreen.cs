@@ -18,20 +18,16 @@ public class LevelSelectionScreen : MonoBehaviour
 
     private void PopulateLevels()
     {
-        // Clear old widgets
         foreach (Transform child in _parentContainer)
         {
             Destroy(child.gameObject);
         }
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1); // default to level 1
 
-        // Create widget for each level
-        for (int i = 0; i < _levelsConfig.GetAllLevels().Count; i++)
+        foreach (var level in _levelsConfig.GetAllLevels())
         {
-            LevelData level = _levelsConfig.GetAllLevels()[i];
             LevelSelectorWidget widget = Instantiate(_levelSelectorPrefab, _parentContainer);
-
-            widget.Setup(level, OnLevelClicked);
-
+            widget.Setup(level, OnLevelClicked, unlockedLevel);
         }
     }
 
