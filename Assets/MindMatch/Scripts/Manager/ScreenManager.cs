@@ -22,7 +22,7 @@ public class ScreenManager : MonoBehaviour
     private Dictionary<Screen, GameObject> _screenDict;
     private Stack<Screen> _screenHistory = new Stack<Screen>();
     private Screen? _currentScreen;
-        public static ScreenManager Instance { get; private set; }
+    public static ScreenManager Instance { get; private set; }
 
 
     private void Awake()
@@ -50,7 +50,6 @@ public class ScreenManager : MonoBehaviour
 
     private void Update()
     {
-        // Handle Android / Escape back button
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Back();
@@ -61,7 +60,6 @@ public class ScreenManager : MonoBehaviour
     {
         if (_currentScreen.HasValue)
         {
-            // Push current screen to history before switching
             _screenHistory.Push(_currentScreen.Value);
             HideScreen(_currentScreen.Value);
         }
@@ -89,13 +87,11 @@ public class ScreenManager : MonoBehaviour
     {
         if (_screenHistory.Count > 0)
         {
-            // Hide current screen
             if (_currentScreen.HasValue)
             {
                 HideScreen(_currentScreen.Value);
             }
 
-            // Show previous screen
             Screen previous = _screenHistory.Pop();
             if (_screenDict.TryGetValue(previous, out GameObject screenObj))
             {

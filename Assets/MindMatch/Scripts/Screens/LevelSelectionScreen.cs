@@ -23,7 +23,7 @@ namespace MindMatch.Gameplay.UI
             {
                 Destroy(child.gameObject);
             }
-            int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1); // default to level 1
+            int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
 
             foreach (var level in _levelsConfig.GetAllLevels())
             {

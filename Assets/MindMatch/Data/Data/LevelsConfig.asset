@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levels:
   - LevelNumber: 1
-    Category: 0
+    Category: 1
     Rows: 2
     Columns: 2
   - LevelNumber: 2
@@ -22,7 +22,7 @@ MonoBehaviour:
     Rows: 2
     Columns: 3
   - LevelNumber: 3
-    Category: 0
+    Category: 1
     Rows: 2
     Columns: 4
   - LevelNumber: 4
@@ -30,7 +30,7 @@ MonoBehaviour:
     Rows: 2
     Columns: 5
   - LevelNumber: 5
-    Category: 0
+    Category: 1
     Rows: 3
     Columns: 4
   - LevelNumber: 6
@@ -38,7 +38,7 @@ MonoBehaviour:
     Rows: 4
     Columns: 5
   - LevelNumber: 7
-    Category: 0
+    Category: 1
     Rows: 4
     Columns: 4
   - LevelNumber: 8
@@ -58,10 +58,18 @@ MonoBehaviour:
     Rows: 4
     Columns: 7
   - LevelNumber: 12
-    Category: 0
+    Category: 1
     Rows: 5
     Columns: 6
   - LevelNumber: 13
     Category: 0
     Rows: 5
     Columns: 6
+  - LevelNumber: 14
+    Category: 1
+    Rows: 5
+    Columns: 6
+  - LevelNumber: 15
+    Category: 1
+    Rows: 5
+    Columns: 5

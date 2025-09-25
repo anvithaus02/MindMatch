@@ -4,8 +4,7 @@ using UnityEngine;
 public enum Category
 {
     Animals,
-    Fruits,
-    Vehicles
+    Mandala,
 }
 
 [System.Serializable]
