@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePlayScreen : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GamePlayScreen : MonoBehaviour
     [SerializeField] private CategoryData _categoryData;
     [SerializeField] private BackButton _backButton;
 
+    [Header("Win info")]
+    [SerializeField] private GameObject _winInfoHolder;
+    [SerializeField] private Button _okButton;
     private CardSpawner _spawner;
     private CardImageProvider _imageProvider;
 
@@ -25,13 +29,22 @@ public class GamePlayScreen : MonoBehaviour
 
     private void OnEnable()
     {
+                _winInfoHolder.SetActive(false);
+
         GameManager.Instance.OnLevelStarted += InitializeLevel;
+        GameManager.Instance.OnLevelCompleted += OnLevelCompleted;
         _backButton.Initialize(OnBackButtonClick);
+        _okButton.onClick.AddListener(OnOkButtonClick);
     }
 
     private void OnDisable()
     {
         GameManager.Instance.OnLevelStarted -= InitializeLevel;
+        GameManager.Instance.OnLevelCompleted -= OnLevelCompleted;
+        _winInfoHolder.SetActive(false);
+
+        _okButton.onClick.RemoveAllListeners();
+
     }
 
     private void InitializeLevel(LevelData level)
@@ -53,6 +66,11 @@ public class GamePlayScreen : MonoBehaviour
                 card.OnCardSelected += OnCardSelected;
         }
 
+    }
+
+    private void OnLevelCompleted()
+    {
+        _winInfoHolder.SetActive(true);
     }
     private void OnCardSelected(MindCard card)
     {
@@ -95,6 +113,11 @@ public class GamePlayScreen : MonoBehaviour
     }
 
     private void OnBackButtonClick()
+    {
+        ScreenManager.Instance.Back();
+    }
+
+    private void OnOkButtonClick()
     {
         ScreenManager.Instance.Back();
     }
