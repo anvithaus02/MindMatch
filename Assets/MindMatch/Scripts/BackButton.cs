@@ -21,10 +21,12 @@ public class BackButton : MonoBehaviour
         transform.DOKill();
         transform.DOScale(0.9f, 0.1f).OnComplete(() =>
         {
-            transform.DOScale(1f, 0.1f);
+            transform.DOScale(1f, 0.1f).OnComplete(() =>
+            {
+                _callback?.Invoke();
+            });
         });
 
-        _callback?.Invoke();
     }
 
     private void OnDestroy()
