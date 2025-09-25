@@ -18,6 +18,8 @@ public class BackButton : MonoBehaviour
 
     private void OnClicked()
     {
+        AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
+
         transform.DOKill();
         transform.DOScale(0.9f, 0.1f).OnComplete(() =>
         {

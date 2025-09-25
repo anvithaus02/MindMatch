@@ -13,14 +13,8 @@ public class LevelSelectorWidget : MonoBehaviour
     private LevelData _levelData;
     private Action<LevelData> _onClick;
 
-    /// <summary>
-    /// Current unlocked level index from PlayerPrefs (or any persistent system)
-    /// </summary>
     private int _unlockedLevel;
 
-    /// <summary>
-    /// Setup the widget with level data and click callback
-    /// </summary>
     public void Setup(LevelData levelData, Action<LevelData> onClick, int unlockedLevel)
     {
         _levelData = levelData;
@@ -37,15 +31,10 @@ public class LevelSelectorWidget : MonoBehaviour
 
     private void OnButtonClicked()
     {
-        // Only allow click if level is unlocked
+        AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
         if (_levelData.LevelNumber <= _unlockedLevel)
         {
             _onClick?.Invoke(_levelData);
-        }
-        else
-        {
-            // Optional: play "locked" feedback
-            Debug.Log($"Level {_levelData.LevelNumber} is locked!");
         }
     }
 

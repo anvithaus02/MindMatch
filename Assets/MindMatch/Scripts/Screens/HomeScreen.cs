@@ -9,6 +9,8 @@ public class HomeScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        AudioManager.Instance.PlayAudio(AudioType.BackgroundMusic);
+
         _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
     }
 
@@ -19,6 +21,7 @@ public class HomeScreen : MonoBehaviour
     }
     private void OnStartGameButtonClicked()
     {
+        AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
         ScreenManager.Instance.ShowScreen(Screen.LevelSelectionScreen);
     }
 }

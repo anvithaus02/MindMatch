@@ -36,7 +36,7 @@ public class MindCard : MonoBehaviour
     {
         _cardIcon = icon;
         iconImage.sprite = icon;
-        ShowFront(); // always start with front face
+        ShowFront(); 
     }
 
     private void OnCardClicked()
@@ -45,6 +45,7 @@ public class MindCard : MonoBehaviour
             return;
 
         FlipToIcon();
+        AudioManager.Instance.PlayAudio(AudioType.CardClick);
         OnCardSelected?.Invoke(this);
     }
 
@@ -65,11 +66,14 @@ public class MindCard : MonoBehaviour
     public void SetMatched()
     {
         _isMatched = true;
+        AudioManager.Instance.PlayAudio(AudioType.MatchSuccess);
         transform.DOScale(Vector3.zero, 0.3f).OnComplete(() => gameObject.SetActive(false));
     }
 
     public void ResetCard()
     {
+                AudioManager.Instance.PlayAudio(AudioType.CardFlip);
+
         ShowFront();
     }
 

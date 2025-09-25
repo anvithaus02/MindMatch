@@ -60,7 +60,7 @@ MonoBehaviour:
   - LevelNumber: 12
     Category: 0
     Rows: 5
-    Columns: 5
+    Columns: 6
   - LevelNumber: 13
     Category: 0
     Rows: 5
