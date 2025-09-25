@@ -371,14 +371,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8, g: 0.7294118, b: 0.7294118, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9fd52f7d21b622144b4edd060be4e5f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -397,8 +397,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5112022403956991769}
-  - component: {fileID: 5112022403956991716}
-  - component: {fileID: 5112022403956991771}
   m_Layer: 5
   m_Name: GamePlayArea
   m_TagString: Untagged
@@ -426,44 +424,6 @@ RectTransform:
   m_AnchoredPosition: {x: 218.37347, y: -0.00024414062}
   m_SizeDelta: {x: -436.7469, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5112022403956991716
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5112022403956991768}
-  m_CullTransparentMesh: 1
---- !u!114 &5112022403956991771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5112022403956991768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.8018868, g: 0.73001957, b: 0.73001957, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5112022404955816156
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +476,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mindCardPrefab: {fileID: 3733163061430215031, guid: 0e73c17d6ecc247438c007d43af7d7e3, type: 3}
   _gamePlayArea: {fileID: 5112022403956991769}
-  _dynamicGridGenerator: {fileID: 0}
   _categoryData: {fileID: 11400000, guid: 68b6d4ec20162f14ab343970474adbe7, type: 2}
   _backButton: {fileID: 8398867593564474256}
   _winInfoHolder: {fileID: 961719229201985049}

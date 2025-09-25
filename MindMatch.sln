@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.CollabProxy.Editor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VisualScripting.Shared.Editor", "Unity.VisualScripting.Shared.Editor.csproj", "{7BE0FECA-A7F0-CFF0-AA92-FB508B0F8F3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Sprite.Editor", "Unity.2D.Sprite.Editor.csproj", "{2B924B7D-E604-DF9F-ECDB-7075C1CD8349}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,10 @@ Global
 		{7BE0FECA-A7F0-CFF0-AA92-FB508B0F8F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BE0FECA-A7F0-CFF0-AA92-FB508B0F8F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BE0FECA-A7F0-CFF0-AA92-FB508B0F8F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B924B7D-E604-DF9F-ECDB-7075C1CD8349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B924B7D-E604-DF9F-ECDB-7075C1CD8349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B924B7D-E604-DF9F-ECDB-7075C1CD8349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B924B7D-E604-DF9F-ECDB-7075C1CD8349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
