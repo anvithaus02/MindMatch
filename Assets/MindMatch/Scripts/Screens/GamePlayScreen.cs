@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-namespace MindMatch.Gameplay.Screens
+namespace MindMatch.Gameplay.UI
 {
     public class GamePlayScreen : MonoBehaviour
     {
@@ -59,7 +59,6 @@ namespace MindMatch.Gameplay.Screens
             var cardImages = _imageProvider.GetShuffledPairs(level.Category, _totalCards);
             _spawner.SpawnCards(_dynamicGridGenerator.transform, cardImages, rows, columns, padding);
 
-            // Subscribe to card events
             foreach (Transform child in _dynamicGridGenerator.transform)
             {
                 MindCard card = child.GetComponent<MindCard>();

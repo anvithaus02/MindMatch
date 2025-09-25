@@ -1,43 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class LevelStatsDisplayWidget : MonoBehaviour
+namespace MindMatch.Gameplay.UI
 {
-    [SerializeField] private UIStatDisplayWidget _attemptsWidget;
-    [SerializeField] private UIStatDisplayWidget _timerWidget;
-
-    private void OnEnable()
+    public class LevelStatsDisplayWidget : MonoBehaviour
     {
-        GameManager.Instance.OnAttemptsChanged += HandleAttemptsChanged;
-        GameManager.Instance.OnTimerChanged += HandleTimerChanged;
+        [SerializeField] private UIStatDisplayWidget _attemptsWidget;
+        [SerializeField] private UIStatDisplayWidget _timerWidget;
 
-        Initialize();
-    }
+        private void OnEnable()
+        {
+            GameManager.Instance.OnAttemptsChanged += HandleAttemptsChanged;
+            GameManager.Instance.OnTimerChanged += HandleTimerChanged;
 
-    private void OnDisable()
-    {
-        GameManager.Instance.OnAttemptsChanged -= HandleAttemptsChanged;
-        GameManager.Instance.OnTimerChanged -= HandleTimerChanged;
-    }
+            Initialize();
+        }
 
-    private void Initialize()
-    {
-        _attemptsWidget.Set("Attempts", "0");
-        _timerWidget.Set("Time", "0:00");
-    }
+        private void OnDisable()
+        {
+            GameManager.Instance.OnAttemptsChanged -= HandleAttemptsChanged;
+            GameManager.Instance.OnTimerChanged -= HandleTimerChanged;
+        }
 
-    private void HandleAttemptsChanged(int attempts)
-    {
-        _attemptsWidget.SetValue(attempts.ToString());
-    }
+        private void Initialize()
+        {
+            _attemptsWidget.Set("Attempts", "0");
+            _timerWidget.Set("Time", "0:00");
+        }
 
-    private void HandleTimerChanged(float timer)
-    {
-        int minutes = Mathf.FloorToInt(timer / 60f);
-        int seconds = Mathf.FloorToInt(timer % 60f);
+        private void HandleAttemptsChanged(int attempts)
+        {
+            _attemptsWidget.SetValue(attempts.ToString());
+        }
 
-        string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
-        _timerWidget.SetValue(formattedTime);
+        private void HandleTimerChanged(float timer)
+        {
+            int minutes = Mathf.FloorToInt(timer / 60f);
+            int seconds = Mathf.FloorToInt(timer % 60f);
+
+            string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
+            _timerWidget.SetValue(formattedTime);
+        }
     }
 }

@@ -1,44 +1,46 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class LevelSelectionScreen : MonoBehaviour
+namespace MindMatch.Gameplay.UI
 {
-    [SerializeField] private LevelsConfig _levelsConfig;
-    [SerializeField] private LevelSelectorWidget _levelSelectorPrefab;
-    [SerializeField] private Transform _parentContainer;
-    [SerializeField] private BackButton _backButton;
-
-
-    private void OnEnable()
+    public class LevelSelectionScreen : MonoBehaviour
     {
-        _backButton.Initialize(OnBackButtonClick);
-        PopulateLevels();
-    }
+        [SerializeField] private LevelsConfig _levelsConfig;
+        [SerializeField] private LevelSelectorWidget _levelSelectorPrefab;
+        [SerializeField] private Transform _parentContainer;
+        [SerializeField] private BackButton _backButton;
 
-    private void PopulateLevels()
-    {
-        foreach (Transform child in _parentContainer)
+
+        private void OnEnable()
         {
-            Destroy(child.gameObject);
+            _backButton.Initialize(OnBackButtonClick);
+            PopulateLevels();
         }
-        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1); // default to level 1
 
-        foreach (var level in _levelsConfig.GetAllLevels())
+        private void PopulateLevels()
         {
-            LevelSelectorWidget widget = Instantiate(_levelSelectorPrefab, _parentContainer);
-            widget.Setup(level, OnLevelClicked, unlockedLevel);
+            foreach (Transform child in _parentContainer)
+            {
+                Destroy(child.gameObject);
+            }
+            int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1); // default to level 1
+
+            foreach (var level in _levelsConfig.GetAllLevels())
+            {
+                LevelSelectorWidget widget = Instantiate(_levelSelectorPrefab, _parentContainer);
+                widget.Setup(level, OnLevelClicked, unlockedLevel);
+            }
         }
-    }
 
-    private void OnLevelClicked(LevelData level)
-    {
-        ScreenManager.Instance.ShowScreen(Screen.GamePlayScreen);
-        GameManager.Instance.StartLevel(level);
-    }
+        private void OnLevelClicked(LevelData level)
+        {
+            ScreenManager.Instance.ShowScreen(Screen.GamePlayScreen);
+            GameManager.Instance.StartLevel(level);
+        }
 
-    private void OnBackButtonClick()
-    {
-        ScreenManager.Instance.Back();
+        private void OnBackButtonClick()
+        {
+            ScreenManager.Instance.Back();
+        }
     }
 }

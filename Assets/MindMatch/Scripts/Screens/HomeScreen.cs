@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class HomeScreen : MonoBehaviour
+namespace MindMatch.Gameplay.UI
 {
-    [SerializeField] private Button _startGameButton;
-
-    private void OnEnable()
+    public class HomeScreen : MonoBehaviour
     {
-        AudioManager.Instance.PlayAudio(AudioType.BackgroundMusic);
+        [SerializeField] private Button _startGameButton;
 
-        _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
-    }
+        private void OnEnable()
+        {
+            AudioManager.Instance.PlayAudio(AudioType.BackgroundMusic);
+            _startGameButton.onClick.AddListener(OnStartGameButtonClicked);
+        }
 
-    private void OnDisable()
-    {
-        _startGameButton.onClick.RemoveAllListeners();
+        private void OnDisable()
+        {
+            _startGameButton.onClick.RemoveAllListeners();
 
-    }
-    private void OnStartGameButtonClicked()
-    {
-        AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
-        ScreenManager.Instance.ShowScreen(Screen.LevelSelectionScreen);
+        }
+        private void OnStartGameButtonClicked()
+        {
+            AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
+            ScreenManager.Instance.ShowScreen(Screen.LevelSelectionScreen);
+        }
     }
 }

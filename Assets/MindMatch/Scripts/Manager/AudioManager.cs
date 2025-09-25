@@ -1,12 +1,14 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
-
     [SerializeField] private AudioData audioData;
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource musicSource;
+
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class AudioManager : MonoBehaviour
 
         if (type == AudioType.BackgroundMusic)
         {
-             if (!musicSource.isPlaying || musicSource.clip != clip)
+            if (!musicSource.isPlaying || musicSource.clip != clip)
             {
                 musicSource.clip = clip;
                 musicSource.volume = volume;

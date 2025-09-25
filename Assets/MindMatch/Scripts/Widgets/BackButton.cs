@@ -2,37 +2,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
-
-public class BackButton : MonoBehaviour
+namespace MindMatch.Gameplay.UI
 {
-    [SerializeField] private Button _button;
-    private UnityAction _callback;
-
-    public void Initialize(UnityAction callback)
+    public class BackButton : MonoBehaviour
     {
-        _callback = callback;
+        [SerializeField] private Button _button;
+        private UnityAction _callback;
 
-        _button.onClick.RemoveAllListeners();
-        _button.onClick.AddListener(OnClicked);
-    }
-
-    private void OnClicked()
-    {
-        AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
-
-        transform.DOKill();
-        transform.DOScale(0.9f, 0.1f).OnComplete(() =>
+        public void Initialize(UnityAction callback)
         {
-            transform.DOScale(1f, 0.1f).OnComplete(() =>
+            _callback = callback;
+
+            _button.onClick.RemoveAllListeners();
+            _button.onClick.AddListener(OnClicked);
+        }
+
+        private void OnClicked()
+        {
+            AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
+
+            transform.DOKill();
+            transform.DOScale(0.9f, 0.1f).OnComplete(() =>
             {
-                _callback?.Invoke();
+                transform.DOScale(1f, 0.1f).OnComplete(() =>
+                {
+                    _callback?.Invoke();
+                });
             });
-        });
 
-    }
+        }
 
-    private void OnDestroy()
-    {
-        _button.onClick.RemoveListener(OnClicked);
+        private void OnDestroy()
+        {
+            _button.onClick.RemoveListener(OnClicked);
+        }
     }
 }

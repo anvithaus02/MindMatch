@@ -2,49 +2,51 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
-
-public class LevelSelectorWidget : MonoBehaviour
+namespace MindMatch.Gameplay.UI
 {
-    [Header("UI References")]
-    [SerializeField] private Button _button;
-    [SerializeField] private TextMeshProUGUI _levelText;
-    [SerializeField] private Image _lockIcon;
-
-    private LevelData _levelData;
-    private Action<LevelData> _onClick;
-
-    private int _unlockedLevel;
-
-    public void Setup(LevelData levelData, Action<LevelData> onClick, int unlockedLevel)
+    public class LevelSelectorWidget : MonoBehaviour
     {
-        _levelData = levelData;
-        _onClick = onClick;
-        _unlockedLevel = unlockedLevel;
+        [Header("UI References")]
+        [SerializeField] private Button _button;
+        [SerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField] private Image _lockIcon;
 
-        _levelText.text = levelData.LevelNumber.ToString();
+        private LevelData _levelData;
+        private Action<LevelData> _onClick;
 
-        _button.onClick.RemoveAllListeners();
-        _button.onClick.AddListener(OnButtonClicked);
+        private int _unlockedLevel;
 
-        SetLevelState();
-    }
-
-    private void OnButtonClicked()
-    {
-        AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
-        if (_levelData.LevelNumber <= _unlockedLevel)
+        public void Setup(LevelData levelData, Action<LevelData> onClick, int unlockedLevel)
         {
-            _onClick?.Invoke(_levelData);
+            _levelData = levelData;
+            _onClick = onClick;
+            _unlockedLevel = unlockedLevel;
+
+            _levelText.text = levelData.LevelNumber.ToString();
+
+            _button.onClick.RemoveAllListeners();
+            _button.onClick.AddListener(OnButtonClicked);
+
+            SetLevelState();
         }
-    }
 
-    private void SetLevelState()
-    {
-        bool isUnlocked = _levelData.LevelNumber <= _unlockedLevel;
+        private void OnButtonClicked()
+        {
+            AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
+            if (_levelData.LevelNumber <= _unlockedLevel)
+            {
+                _onClick?.Invoke(_levelData);
+            }
+        }
 
-        _lockIcon.gameObject.SetActive(!isUnlocked);
-        _levelText.gameObject.SetActive(isUnlocked);
+        private void SetLevelState()
+        {
+            bool isUnlocked = _levelData.LevelNumber <= _unlockedLevel;
 
-        _button.interactable = isUnlocked;
+            _lockIcon.gameObject.SetActive(!isUnlocked);
+            _levelText.gameObject.SetActive(isUnlocked);
+
+            _button.interactable = isUnlocked;
+        }
     }
 }

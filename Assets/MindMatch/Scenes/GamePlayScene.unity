@@ -913,6 +913,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePlayScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5112022404955816156, guid: 9524265ace256cf458c54d46b8842983, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5112022404955816157, guid: 9524265ace256cf458c54d46b8842983, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
