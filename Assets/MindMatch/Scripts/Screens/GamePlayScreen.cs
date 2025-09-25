@@ -1,4 +1,5 @@
 using System.Collections;
+using MindMatch.UI;
 using UnityEngine;
 using UnityEngine.UI;
 namespace MindMatch.Gameplay.UI
@@ -12,7 +13,7 @@ namespace MindMatch.Gameplay.UI
 
         [Header("Win info")]
         [SerializeField] private GameObject _winInfoHolder;
-        [SerializeField] private Button _okButton;
+        [SerializeField] private ActionButton _okButton;
         private CardSpawner _spawner;
         private CardImageProvider _imageProvider;
 
@@ -35,7 +36,7 @@ namespace MindMatch.Gameplay.UI
             GameManager.Instance.OnLevelStarted += InitializeLevel;
             GameManager.Instance.OnLevelCompleted += OnLevelCompleted;
             _backButton.Initialize(OnBackButtonClick);
-            _okButton.onClick.AddListener(OnOkButtonClick);
+            _okButton.Initialize("OK", OnOkButtonClick);
         }
 
         private void OnDisable()
@@ -43,8 +44,6 @@ namespace MindMatch.Gameplay.UI
             GameManager.Instance.OnLevelStarted -= InitializeLevel;
             GameManager.Instance.OnLevelCompleted -= OnLevelCompleted;
             _winInfoHolder.SetActive(false);
-
-            _okButton.onClick.RemoveAllListeners();
 
             foreach (Transform child in _gamePlayArea)
                 Destroy(child.gameObject);

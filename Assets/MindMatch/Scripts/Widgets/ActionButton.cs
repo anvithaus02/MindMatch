@@ -1,24 +1,39 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using TMPro;
+using System;
 using DG.Tweening;
-namespace MindMatch.Gameplay.UI
+using UnityEngine.Events;
+
+namespace MindMatch.UI
 {
-    public class BackButton : MonoBehaviour
+    public class ActionButton : MonoBehaviour
     {
+        [Header("UI Components")]
+        [SerializeField] private TextMeshProUGUI _buttonText;
         [SerializeField] private Button _button;
+
         private UnityAction _callback;
 
-        private void OnDestroy()
+        private void OnEnable()
         {
-            _button.onClick.RemoveListener(OnClicked);
-        }
-        public void Initialize(UnityAction callback)
-        {
-            _callback = callback;
-
-            _button.onClick.RemoveAllListeners();
             _button.onClick.AddListener(OnClicked);
+        }
+
+        private void OnDisable()
+        {
+            _button.onClick.RemoveAllListeners();
+        }
+
+        public void Initialize(string text, UnityAction onClick)
+        {
+            _callback = onClick;
+            SetButtonText(text);
+        }
+
+        private void SetButtonText(string text)
+        {
+            _buttonText.text = text;
         }
 
         private void OnClicked()
@@ -35,7 +50,6 @@ namespace MindMatch.Gameplay.UI
             });
 
         }
-
 
     }
 }

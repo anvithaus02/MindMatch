@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MindMatch/Scenes/GamePlayScene.unity
+    path: Assets/MindMatch/Scenes/MainScene.unity
     guid: 9715a27858f05d44a9a915da90fc78ce
   m_configObjects: {}
