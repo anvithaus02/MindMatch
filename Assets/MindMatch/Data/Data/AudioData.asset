@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AudioData
   m_EditorClassIdentifier: 
   audioClips:
-  - type: 5
+  - type: 4
     clip: {fileID: 8300000, guid: 424c2a3721c3bdc4ba2bf4a7235a8c7f, type: 3}
     volume: 0.1
   - type: 0
