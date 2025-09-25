@@ -49,7 +49,6 @@ namespace MindMatch.Gameplay.UI
                 Destroy(child.gameObject);
 
         }
-
         private void InitializeLevel(LevelData level)
         {
             int rows = level.Rows;
@@ -60,58 +59,11 @@ namespace MindMatch.Gameplay.UI
 
             var cardImages = _imageProvider.GetShuffledPairs(level.Category, _totalCards);
             _spawner.SpawnCards(_gamePlayArea, cardImages, rows, columns, padding);
-
-            foreach (Transform child in _gamePlayArea.transform)
-            {
-                MindCard card = child.GetComponent<MindCard>();
-                if (card != null)
-                    card.OnCardSelected += OnCardSelected;
-            }
-
         }
 
         private void OnLevelCompleted()
         {
             _winInfoHolder.SetActive(true);
-        }
-        private void OnCardSelected(MindCard card)
-        {
-            if (_firstSelected == null)
-            {
-                _firstSelected = card;
-            }
-            else if (_secondSelected == null)
-            {
-                _secondSelected = card;
-                GameManager.Instance.RegisterAttempt();
-                StartCoroutine(CheckMatch());
-            }
-        }
-
-        private IEnumerator CheckMatch()
-        {
-            yield return new WaitForSeconds(0.5f);
-
-            if (_firstSelected == null || _secondSelected == null)
-                yield break;
-
-            if (_firstSelected.CardIcon == _secondSelected.CardIcon)
-            {
-                _firstSelected.SetMatched();
-                _secondSelected.SetMatched();
-
-                _matchedCards += 2;
-                if (_matchedCards >= _totalCards)
-                    GameManager.Instance.CompleteLevel();
-            }
-            else
-            {
-                _firstSelected.ResetCard();
-                _secondSelected.ResetCard();
-            }
-
-            _firstSelected = null;
-            _secondSelected = null;
         }
 
         private void OnBackButtonClick()

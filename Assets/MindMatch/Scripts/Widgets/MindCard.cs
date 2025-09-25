@@ -50,7 +50,7 @@ namespace MindMatch.Gameplay
 
             SetFlipped(true);
             AudioManager.Instance.PlayAudio(AudioType.CardClick);
-            OnCardSelected?.Invoke(this);
+            GameManager.Instance.OnCardSelected(this);
         }
         private void SetFlipped(bool showIcon)
         {
