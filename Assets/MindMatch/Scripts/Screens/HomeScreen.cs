@@ -11,7 +11,7 @@ namespace MindMatch.Gameplay.UI
 
         private void OnEnable()
         {
-            AudioManager.Instance.PlayAudio(AudioType.BackgroundMusic);
+            AudioManager.Instance.PlayAudio(GameAudioType.BackgroundMusic);
             _startGameButton.Initialize("START", OnStartGameButtonClicked);
         }
         private void OnStartGameButtonClicked()

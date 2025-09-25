@@ -32,7 +32,7 @@ namespace MindMatch.Gameplay.UI
 
         private void OnButtonClicked()
         {
-            AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
+            AudioManager.Instance.PlayAudio(GameAudioType.ButtonClick);
             if (_levelData.LevelNumber <= _unlockedLevel)
             {
                 _onClick?.Invoke(_levelData);

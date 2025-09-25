@@ -17,9 +17,6 @@ namespace MindMatch.Gameplay
         private bool _isMatched;
 
         private const float MatchScaleDuration = 0.3f;
-        public event Action<MindCard> OnCardSelected;
-        public bool IsMatched => _isMatched;
-        public bool IsFlipped => _isFlipped;
         public Sprite CardIcon => _cardIcon;
 
         private void OnEnable() => _cardButton.onClick.AddListener(OnCardClicked);
@@ -34,14 +31,14 @@ namespace MindMatch.Gameplay
         public void SetMatched()
         {
             _isMatched = true;
-            AudioManager.Instance.PlayAudio(AudioType.MatchSuccess);
+            AudioManager.Instance.PlayAudio(GameAudioType.MatchSuccess);
             transform.DOScale(Vector3.zero, MatchScaleDuration)
                      .OnComplete(() => gameObject.SetActive(false));
         }
 
         public void ResetCard()
         {
-            AudioManager.Instance.PlayAudio(AudioType.CardFlip);
+            AudioManager.Instance.PlayAudio(GameAudioType.CardFlip);
             SetFlipped(false);
         }
         private void OnCardClicked()
@@ -49,7 +46,7 @@ namespace MindMatch.Gameplay
             if (_isFlipped || _isMatched) return;
 
             SetFlipped(true);
-            AudioManager.Instance.PlayAudio(AudioType.CardClick);
+            AudioManager.Instance.PlayAudio(GameAudioType.CardClick);
             GameManager.Instance.OnCardSelected(this);
         }
         private void SetFlipped(bool showIcon)

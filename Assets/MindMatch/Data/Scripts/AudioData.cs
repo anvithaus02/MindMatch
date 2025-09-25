@@ -1,47 +1,47 @@
 using UnityEngine;
-
-public enum AudioType
+namespace MindMatch.Gameplay
 {
-    ButtonClick,
-    CardClick,
-    CardFlip,
-    MatchSuccess,
-    LevelComplete,
-    BackgroundMusic
-}
-
-
-[CreateAssetMenu(fileName = "AudioData", menuName = "MindMatch/AudioData", order = 1)]
-public class AudioData : ScriptableObject
-{
-    [System.Serializable]
-    public struct AudioClipEntry
+    public enum GameAudioType
     {
-        public AudioType type;
-        public AudioClip clip;
-        public float volume;
+        ButtonClick,
+        CardClick,
+        CardFlip,
+        MatchSuccess,
+        BackgroundMusic
     }
 
-    public AudioClipEntry[] audioClips;
 
-    public AudioClip GetClip(AudioType type)
+    [CreateAssetMenu(fileName = "AudioData", menuName = "MindMatch/AudioData", order = 1)]
+    public class AudioData : ScriptableObject
     {
-        foreach (var entry in audioClips)
+        [System.Serializable]
+        public struct AudioClipEntry
         {
-            if (entry.type == type)
-                return entry.clip;
+            public GameAudioType type;
+            public AudioClip clip;
+            public float volume;
         }
-        Debug.LogWarning($"Audio clip for {type} not found!");
-        return null;
-    }
 
-    public float GetVolume(AudioType type)
-    {
-        foreach (var entry in audioClips)
+        public AudioClipEntry[] audioClips;
+
+        public AudioClip GetClip(GameAudioType type)
         {
-            if (entry.type == type)
-                return entry.volume;
+            foreach (var entry in audioClips)
+            {
+                if (entry.type == type)
+                    return entry.clip;
+            }
+            return null;
         }
-        return 1f;
+
+        public float GetVolume(GameAudioType type)
+        {
+            foreach (var entry in audioClips)
+            {
+                if (entry.type == type)
+                    return entry.volume;
+            }
+            return 1f;
+        }
     }
 }

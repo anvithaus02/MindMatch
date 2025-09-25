@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using DG.Tweening;
 using UnityEngine.Events;
+using MindMatch.Gameplay;
 
 namespace MindMatch.UI
 {
@@ -38,7 +38,7 @@ namespace MindMatch.UI
 
         private void OnClicked()
         {
-            AudioManager.Instance.PlayAudio(AudioType.ButtonClick);
+            AudioManager.Instance.PlayAudio(GameAudioType.ButtonClick);
 
             transform.DOKill();
             transform.DOScale(0.9f, 0.1f).OnComplete(() =>

@@ -138,8 +138,4 @@ public class GameManager : MonoBehaviour
         _firstSelected = null;
         _secondSelected = null;
     }
-
-
-    public LevelData GetCurrentLevel() => _currentLevelData;
-
 }

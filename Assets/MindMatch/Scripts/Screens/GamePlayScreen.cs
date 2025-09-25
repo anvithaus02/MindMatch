@@ -1,79 +1,55 @@
-using System.Collections;
 using MindMatch.UI;
 using UnityEngine;
-using UnityEngine.UI;
+
 namespace MindMatch.Gameplay.UI
 {
     public class GamePlayScreen : MonoBehaviour
     {
+        [Header("Prefabs & References")]
         [SerializeField] private MindCard _mindCardPrefab;
         [SerializeField] private RectTransform _gamePlayArea;
         [SerializeField] private CategoryData _categoryData;
         [SerializeField] private BackButton _backButton;
 
-        [Header("Win info")]
+        [Header("Win Screen")]
         [SerializeField] private GameObject _winInfoHolder;
         [SerializeField] private ActionButton _okButton;
-        private CardSpawner _spawner;
-        private CardImageProvider _imageProvider;
 
-        private MindCard _firstSelected;
-        private MindCard _secondSelected;
-
-        private int _totalCards;
-        private int _matchedCards;
-
-        private void Awake()
-        {
-            _spawner = new CardSpawner(_mindCardPrefab);
-            _imageProvider = new CardImageProvider(_categoryData);
-        }
 
         private void OnEnable()
         {
-            _winInfoHolder.SetActive(false);
+            SetWinInfoVisible(false);
 
             GameManager.Instance.OnLevelStarted += InitializeLevel;
-            GameManager.Instance.OnLevelCompleted += OnLevelCompleted;
-            _backButton.Initialize(OnBackButtonClick);
-            _okButton.Initialize("OK", OnOkButtonClick);
+            GameManager.Instance.OnLevelCompleted += () => SetWinInfoVisible(true);
+
+            _backButton.Initialize(HandleBackOrOkButton);
+            _okButton.Initialize("OK", HandleBackOrOkButton);
         }
 
         private void OnDisable()
         {
             GameManager.Instance.OnLevelStarted -= InitializeLevel;
-            GameManager.Instance.OnLevelCompleted -= OnLevelCompleted;
-            _winInfoHolder.SetActive(false);
+            GameManager.Instance.OnLevelCompleted -= () => SetWinInfoVisible(true);
 
-            foreach (Transform child in _gamePlayArea)
-                Destroy(child.gameObject);
+            SetWinInfoVisible(false);
+            ClearPlayArea();
 
         }
         private void InitializeLevel(LevelData level)
         {
-            int rows = level.Rows;
-            int columns = level.Columns;
-            int padding = 5;
-            _totalCards = rows * columns;
-            _matchedCards = 0;
-
-            var cardImages = _imageProvider.GetShuffledPairs(level.Category, _totalCards);
-            _spawner.SpawnCards(_gamePlayArea, cardImages, rows, columns, padding);
+            ClearPlayArea();
+            CardSpawner.SpawnCards(_mindCardPrefab, _categoryData, _gamePlayArea, level);
         }
 
-        private void OnLevelCompleted()
-        {
-            _winInfoHolder.SetActive(true);
-        }
+        private void SetWinInfoVisible(bool isVisible) => _winInfoHolder.SetActive(isVisible);
 
-        private void OnBackButtonClick()
-        {
-            ScreenManager.Instance.Back();
-        }
+        private void HandleBackOrOkButton() => ScreenManager.Instance.Back();
 
-        private void OnOkButtonClick()
+        private void ClearPlayArea()
         {
-            ScreenManager.Instance.Back();
+            foreach (Transform child in _gamePlayArea)
+                Destroy(child.gameObject);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MindMatch.Core;
 using UnityEngine;
 
 namespace MindMatch.Gameplay
@@ -16,31 +17,21 @@ namespace MindMatch.Gameplay
             this.padding = padding;
         }
     }
-    public class CardSpawner
+    public static class CardSpawner
     {
-        private MindCard _cardPrefab;
-
-        public CardSpawner(MindCard cardPrefab)
+        private const int DefaultPadding = 5;
+        public static void SpawnCards(MindCard cardPrefab, CategoryData categoryData, RectTransform parent, LevelData levelData)
         {
-            _cardPrefab = cardPrefab;
-        }
+            var cardImages = GetShuffledPairs(categoryData, levelData.Category, levelData.Rows * levelData.Columns);
 
-        public void SpawnCards(RectTransform parent, List<Sprite> cardImages, int rows, int columns, float padding)
-        {
-            if (cardImages.Count != (rows * columns))
-            {
-                Debug.LogError("Card images count does not match total cards!" + cardImages.Count + "   " + (rows * columns));
-                return;
-            }
-
-            SpawnData spawnData = CardGridCalculator.GetCardSpawnPositions(parent, rows, columns, padding);
+            SpawnData spawnData = CardGridCalculator.GetCardSpawnPositions(parent, levelData.Rows, levelData.Columns, DefaultPadding);
 
             int index = 0;
-            for (int r = 0; r < rows; r++)
+            for (int r = 0; r < levelData.Rows; r++)
             {
-                for (int c = 0; c < columns; c++)
+                for (int c = 0; c < levelData.Columns; c++)
                 {
-                    MindCard card = Object.Instantiate(_cardPrefab, parent.transform);
+                    MindCard card = Object.Instantiate(cardPrefab, parent.transform);
                     RectTransform rt = card.GetComponent<RectTransform>();
                     rt.sizeDelta = new Vector2(spawnData.cellSize, spawnData.cellSize);
                     rt.localPosition = new Vector3(
@@ -52,6 +43,29 @@ namespace MindMatch.Gameplay
                     index++;
                 }
             }
+        }
+
+        private static List<Sprite> GetShuffledPairs(CategoryData categoryData, Category category, int totalCards)
+        {
+            List<Sprite> available = categoryData.GetAllImages(category);
+
+            if (available.Count < totalCards / 2)
+            {
+                Debug.LogError($"Not enough images in category {category}.");
+                return new List<Sprite>();
+            }
+
+            List<Sprite> chosen = new List<Sprite>(Utility.ShuffleList(available));
+            chosen = chosen.GetRange(0, totalCards / 2);
+
+            List<Sprite> cardImages = new List<Sprite>();
+            foreach (var img in chosen)
+            {
+                cardImages.Add(img);
+                cardImages.Add(img);
+            }
+
+            return Utility.ShuffleList(cardImages);
         }
     }
 }
