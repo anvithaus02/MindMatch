@@ -19,6 +19,6 @@ public class HomeScreen : MonoBehaviour
     }
     private void OnStartGameButtonClicked()
     {
-        ScreenManager.Instance.ShowScreen(Screen.GamePlayScreen);
+        ScreenManager.Instance.ShowScreen(Screen.LevelSelectionScreen);
     }
 }

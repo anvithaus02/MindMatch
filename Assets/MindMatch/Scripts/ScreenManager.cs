@@ -5,7 +5,7 @@ public enum Screen
 {
     HomeScreen,
     GamePlayScreen,
-    SettingsScreen
+    LevelSelectionScreen
 }
 
 public class ScreenManager : MonoBehaviour

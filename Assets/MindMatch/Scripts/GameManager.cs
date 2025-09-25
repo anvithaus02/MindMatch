@@ -7,11 +7,16 @@ public class GameManager : MonoBehaviour
 
     public event Action<int> OnAttemptsChanged;
     public event Action<float> OnTimerChanged;
+
+        public event Action<LevelData> OnLevelStarted; 
+
     public event Action OnLevelCompleted;
 
     private int _attempts;
     private float _timer;
     private bool _isLevelActive;
+    private LevelData _currentLevel;
+
 
     private void Awake()
     {
@@ -33,11 +38,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartLevel()
+    public void StartLevel(LevelData levelData)
     {
         _attempts = 0;
         _timer = 0f;
         _isLevelActive = true;
+
+        OnLevelStarted?.Invoke(levelData);
 
         OnAttemptsChanged?.Invoke(_attempts);
         OnTimerChanged?.Invoke(_timer);
@@ -54,4 +61,7 @@ public class GameManager : MonoBehaviour
         _isLevelActive = false;
         OnLevelCompleted?.Invoke();
     }
+    
+        public LevelData GetCurrentLevel() => _currentLevel;
+
 }
